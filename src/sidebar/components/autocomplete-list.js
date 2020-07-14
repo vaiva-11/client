@@ -5,6 +5,7 @@ import propTypes from 'prop-types';
 
 const defaultListFormatter = item => item;
 /**
+ * @template T
  * @typedef AutocompleteListProps
  * @prop {number} [activeItem] - The index of the highlighted item.
  * @prop {string} [id] - Optional unique HTML attribute id. This can be used
@@ -12,12 +13,12 @@ const defaultListFormatter = item => item;
  * @prop {string} [itemPrefixId] - Optional unique HTML attribute id prefix
  *   for each item in the list. The final value of each items' id is
  *   `{itemPrefixId}{activeItem}`
- * @prop {(Object|string)[]} list - The list of items to render. This can be a simple
+ * @prop {(T)[]} list - The list of items to render. This can be a simple
  *   list of strings or a list of objects when used with listFormatter.
- * @prop {(a: Object|string, b?: number) => any} [listFormatter] - An optional formatter
+ * @prop {(item: T, index?: number) => any} [listFormatter] - An optional formatter
  *   to render each item inside an <li> tag This is useful if the list is an array of
  *   objects rather than just strings.
- * @prop {(a: Object|string) => void} onSelectItem - Callback when an item is clicked with
+ * @prop {(item: T) => void} onSelectItem - Callback when an item is clicked with
  *   the mouse.
  * @prop {boolean} [open] - Is the list open or closed?
  */
@@ -29,7 +30,7 @@ const defaultListFormatter = item => item;
  * used by itself.
  *
  * Modeled after the "ARIA 1.1 Combobox with Listbox Popup"
- * @param {AutocompleteListProps} props
+ * @param {AutocompleteListProps<Object|string>} props
  */
 
 export default function AutocompleteList({
@@ -64,7 +65,6 @@ export default function AutocompleteList({
           }}
           {...props}
         >
-          {/* @ts-ignore TODO: fix the type for this callback */}
           {listFormatter(item, index)}
         </li>
       );

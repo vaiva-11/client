@@ -91,7 +91,7 @@ function TagEditor({ onEditTags, tags: tagsService, tagList }) {
    * reset the activeItem and open the AutocompleteList
    */
   const updateSuggestions = () => {
-    const value = inputEl.current ? inputEl.current.value.trim() : '';
+    const value = /** @type {HTMLInputElement} */ (inputEl.current).value.trim();
     if (value === '') {
       // If there is no input, just hide the suggestions
       setSuggestionsListOpen(false);
@@ -150,10 +150,9 @@ function TagEditor({ onEditTags, tags: tagsService, tagList }) {
     setSuggestionsListOpen(false);
     setActiveItem(-1);
 
-    if (inputEl.current) {
-      inputEl.current.value = '';
-      inputEl.current.focus();
-    }
+    const input = /** @type {HTMLInputElement} */ (inputEl.current);
+    input.value = '';
+    input.focus();
   };
 
   /**
@@ -187,7 +186,7 @@ function TagEditor({ onEditTags, tags: tagsService, tagList }) {
    * Opens the AutocompleteList on focus if there is a value in the input
    */
   const handleFocus = () => {
-    if (inputEl.current && inputEl.current.value.trim().length) {
+    if (/** @type {HTMLInputElement} */ (inputEl.current).value.trim().length) {
       setSuggestionsListOpen(true);
     }
   };
@@ -234,9 +233,7 @@ function TagEditor({ onEditTags, tags: tagsService, tagList }) {
       case ',':
         if (activeItem === -1) {
           // nothing selected, just add the typed text
-          if (inputEl.current) {
-            addTag(inputEl.current.value);
-          }
+          addTag(/** @type {HTMLInputElement} */ (inputEl.current).value);
         } else {
           addTag(suggestions[activeItem]);
         }

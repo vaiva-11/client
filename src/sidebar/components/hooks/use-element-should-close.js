@@ -18,20 +18,6 @@ import { listen } from '../../util/dom';
  */
 
 /**
- * @typedef Ref2
- * @prop current {Node} - HTML node
- *
- * A ref object attached to a HTML node.
- */
-
-/**
- * @typedef PreactRef2
- * @prop current {Object} - preact component object
- *
- * A ref object attached to a custom preact component.
- */
-
-/**
  * This hook adds appropriate `eventListener`s to the document when a target
  * element (`closeableEl`) is open. Events such as `click` and `focus` on
  * elements that fall outside of `closeableEl` in the document, or keydown

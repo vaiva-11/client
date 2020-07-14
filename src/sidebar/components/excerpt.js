@@ -62,7 +62,7 @@ const noop = () => {};
  * @prop {boolean} [collapse] - If the content should be truncated if its height
  *   exceeds `collapsedHeight + overflowThreshold`.  This prop is only used if
  *   `inlineControls` is false.
- * @prop {number} [collapsedHeight] - Maximum height of the container, in pixels,
+ * @prop {number} collapsedHeight - Maximum height of the container, in pixels,
  *   when it is collapsed.
  * @prop {number} [overflowThreshold] - An additional margin of pixels by which
  *   the content height can exceed `collapsedHeight` before it becomes collapsible.

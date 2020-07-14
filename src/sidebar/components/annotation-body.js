@@ -15,12 +15,12 @@ import TagList from './tag-list';
 
 /**
  * @typedef AnnotationBodyProps
- * @prop {Annotation} props.annotation - The annotation in question
- * @prop {boolean} [props.isEditing] - Whether to display the body in edit mode (if true) or view mode.
- * @prop {(a: Object<'tags', string[]>) => void} [props.onEditTags] - Callback invoked when the user edits tags.
- * @prop {(a?: Object<'text', string>) => void} [props.onEditText] - Callback invoked when the user edits the content of the annotation body.
- * @prop {string[]} props.tags
- * @prop {string} props.text -
+ * @prop {Annotation} annotation - The annotation in question
+ * @prop {boolean} [isEditing] - Whether to display the body in edit mode (if true) or view mode.
+ * @prop {(a: Object<'tags', string[]>) => void} [onEditTags] - Callback invoked when the user edits tags.
+ * @prop {(a?: Object<'text', string>) => void} [onEditText] - Callback invoked when the user edits the content of the annotation body.
+ * @prop {string[]} tags
+ * @prop {string} text -
  *     The markdown annotation body, which is either rendered as HTML (if `isEditing`
  *     is false) or displayed in a text area otherwise.
  */
