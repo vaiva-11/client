@@ -4,14 +4,28 @@ import { normalizeKeyName } from '../../../shared/browser-compatibility-utils';
 import { listen } from '../../util/dom';
 
 /**
- * @typedef Ref
+ * @template T
+ * @typedef {import("preact/hooks").Ref<T>} Ref
+ */
+
+/**
+ * @typedef PreactElement
+ * @prop {Node} base
+ */
+
+/**
+ * @typedef {Ref<HTMLButtonElement> & Ref<PreactElement>} PreactRef
+ */
+
+/**
+ * @typedef Ref2
  * @prop current {Node} - HTML node
  *
  * A ref object attached to a HTML node.
  */
 
 /**
- * @typedef PreactRef
+ * @typedef PreactRef2
  * @prop current {Object} - preact component object
  *
  * A ref object attached to a custom preact component.
@@ -28,11 +42,11 @@ import { listen } from '../../util/dom';
  * Limitation: This will not work when attached to a custom component that has
  * more than one element nested under a root <Fragment>
  *
- * @param {Ref|PreactRef} closeableEl - ref object:
+ * @param {PreactRef} closeableEl - ref object:
  *                                Reference to a DOM element or preat component
  *                                that should be closed when DOM elements external
  *                                to it are interacted with or `Esc` is pressed
- * @param {bool} isOpen - Whether the element is currently open. This hook does
+ * @param {boolean} isOpen - Whether the element is currently open. This hook does
  *                        not attach event listeners/do anything if it's not.
  * @param {() => void} handleClose - A function that will do the actual closing
  *                                   of `closeableEl`
@@ -46,7 +60,7 @@ export default function useElementShouldClose(
    *  Helper to return the underlying node object whether
    *  `closeableEl` is attached to an HTMLNode or Preact component.
    *
-   *  @param {Preact ref} closeableEl
+   *  @param {PreactRef} closeableEl
    *  @returns {Node}
    */
 
@@ -67,7 +81,9 @@ export default function useElementShouldClose(
     }
 
     // Close element when user presses Escape key, regardless of focus.
-    const removeKeyDownListener = listen(document.body, ['keydown'], event => {
+    const removeKeyDownListener = listen(document.body, ['keydown'], (
+      /** @type {KeyboardEvent}*/ event
+    ) => {
       if (normalizeKeyName(event.key) === 'Escape') {
         handleClose();
       }
@@ -80,7 +96,7 @@ export default function useElementShouldClose(
       'focus',
       event => {
         const current = getCurrentNode(closeableEl);
-        if (!current.contains(event.target)) {
+        if (!current.contains(/** @type {Node} */ (event.target))) {
           handleClose();
         }
       },
@@ -94,7 +110,7 @@ export default function useElementShouldClose(
       ['mousedown', 'click'],
       event => {
         const current = getCurrentNode(closeableEl);
-        if (!current.contains(event.target)) {
+        if (!current.contains(/** @type {Node} */ (event.target))) {
           handleClose();
         }
       },
