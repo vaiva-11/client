@@ -6,6 +6,8 @@ export default {
   PANEL_HELP: 'help',
   PANEL_LOGIN_PROMPT: 'loginPrompt',
   PANEL_SHARE_ANNOTATIONS: 'shareGroupAnnotations',
+  TABS: ['annotation', 'note', 'orphan'],
+  TAB_DEFAULT: 'annotation',
   TAB_ANNOTATIONS: 'annotation',
   TAB_NOTES: 'note',
   TAB_ORPHANS: 'orphan',
